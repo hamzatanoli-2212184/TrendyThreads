@@ -29,6 +29,7 @@
             margin-bottom: 1rem;
         }
         .gallery img {
+            height:75%;
             border-radius: 10px;
             transition: transform 0.3s ease, filter 0.3s ease;
         }
@@ -61,7 +62,19 @@
         .btn-cart:hover {
             background-color: #e65c00;
         }
-        
+        /* .card{
+            height: 500px;
+        }
+        .p-card{
+            height: 100%;
+            background-color:"black "
+        }
+        .card-img{
+            height:10px;
+        }
+         .img-fluid{
+              height:400px  
+         } */
     </style>
 </head>
 <body>
@@ -74,8 +87,8 @@
             <div class="row g-4">
                 <!-- Product 1 -->
                 <div class="col-md-3 text-center card">
-                    <div class="card">
-                        <img src="build/assets/images/p3.png" class="img-fluid" alt="Gallery Image 1">
+                    <div class="p-card card">
+                        <img src="build/assets/images/p3.png"  class="card-img img-fluid" alt="Gallery Image 1">
                         <div class="card-body">
                             <h5 class="card-title">Stylish T-Shirt</h5>
                             <p class="card-text">$29.99</p>
@@ -173,8 +186,8 @@
                 </div>
                 <!-- Product 10 -->
                 <div class="col-md-3 text-center card">
-                    <div class="card">
-                        <img src="build/assets/images/men9.jpg" class="img-fluid" alt="Gallery Image 10">
+                    <div class=" card">
+                        <img src="build/assets/images/men9.jpg" class="card-img img-fluid" alt="Gallery Image 10">
                         <div class="card-body">
                             <h5 class="card-title">Sporty Shoes</h5>
                             <p class="card-text">$49.99</p>
