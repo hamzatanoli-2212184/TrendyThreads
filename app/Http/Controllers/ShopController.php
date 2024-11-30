@@ -8,7 +8,10 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $products = Product::all(); // Fetch all products
-        return view('shop.index', compact('products')); // Send data to shop page
+        // Database se products fetch karte hain
+        $products = Product::all();
+
+        // Products ko shop page ke liye bhej dete hain
+        return view('web.shop', compact('products'));
     }
 }

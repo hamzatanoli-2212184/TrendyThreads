@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\ProductController; // Import the ProductController
 use App\Http\Controllers\AdminController; // Import the AdminController
+use App\Http\Controllers\ShopController;
+
+
 
 // Public Routes
 Route::controller(WebController::class)->group(function () {
@@ -14,6 +17,7 @@ Route::controller(WebController::class)->group(function () {
     Route::get('/women', 'women')->name('women'); // Women page
     Route::get('/cart', 'cart')->name('cart'); // Cart page
     Route::get('/contact', 'contact')->name('contact'); // Contact page
+    
 });
 
 // Admin Routes with Authentication
@@ -30,6 +34,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit'); // Edit product
     Route::put('/products/{product}', [ProductController::class, 'update'])->name('admin.products.update'); // Update product
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy'); // Delete product
+    Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 });
 
 // Authentication Routes
