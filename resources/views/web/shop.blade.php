@@ -96,7 +96,6 @@
 
 <body>
    
-
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
@@ -106,111 +105,131 @@
         </div>
     </section>
 
-    <!-- Shop Section -->
-    <section class="container my-5" id="shop">
-    <h2 class="text-center mb-4">Our Bestsellers</h2>
-    <div class="row g-4">
-        <!-- Static Images -->
-        <div class="col-md-3">
-            <div class="card">
-                <img src="{{ asset('build/assets/images/product1.jpg') }}" class="card-img-top" alt="Classic T-Shirt">
-                <div class="card-body">
-                    <h5 class="card-title">Classic T-Shirt</h5>
-                    <p class="card-text">$25.99</p>
-                    <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
-                </div>
+<!-- Category Filter Dropdown -->
+<form method="GET" action="{{ route('shop') }}">
+            <div class="form-group mb-4">
+                <select name="category" class="form-control" onchange="this.form.submit()">
+                    <option value="">All Categories</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="{{ asset('build/assets/images/product2.jpg') }}" class="card-img-top" alt="Stylish Jacket">
-                <div class="card-body">
-                    <h5 class="card-title">Stylish Jacket</h5>
-                    <p class="card-text">$35.99</p>
-                    <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="{{ asset('build/assets/images/product3.jpg') }}" class="card-img-top" alt="Denim Jeans">
-                <div class="card-body">
-                    <h5 class="card-title">Denim Jeans</h5>
-                    <p class="card-text">$45.99</p>
-                    <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="{{ asset('build/assets/images/product4.jpg') }}" class="card-img-top" alt="Trendy Hoodie">
-                <div class="card-body">
-                    <h5 class="card-title">Trendy Hoodie</h5>
-                    <p class="card-text">$49.99</p>
-                    <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="{{ asset('build/assets/images/product5.jpg') }}" class="card-img-top" alt="Summer Dress">
-                <div class="card-body">
-                    <h5 class="card-title">Summer Dress</h5>
-                    <p class="card-text">$29.99</p>
-                    <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="{{ asset('build/assets/images/product6.jpg') }}" class="card-img-top" alt="Casual Shirt">
-                <div class="card-body">
-                    <h5 class="card-title">Casual Shirt</h5>
-                    <p class="card-text">$22.99</p>
-                    <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="{{ asset('build/assets/images/product7.jpg') }}" class="card-img-top" alt="Formal Blazer">
-                <div class="card-body">
-                    <h5 class="card-title">Formal Blazer</h5>
-                    <p class="card-text">$55.99</p>
-                    <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="{{ asset('build/assets/images/product8.jpg') }}" class="card-img-top" alt="Chic Skirt">
-                <div class="card-body">
-                    <h5 class="card-title">Chic Skirt</h5>
-                    <p class="card-text">$24.99</p>
-                    <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-        </div>
+        </form>
 
-        <!-- Dynamic Images -->
-        @foreach($products as $product)
+        <div class="row g-4">
+
+        
+  <!-- Shop Section -->
+    <section class="container my-5" id="shop">
+        <h2 class="text-center mb-4">Our Bestsellers</h2>
+        <div class="row g-4">
+            <!-- Static Products -->
             <div class="col-md-3">
                 <div class="card">
-                    <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                    <img src="{{ asset('build/assets/images/product1.jpg') }}" class="card-img-top" alt="Classic T-Shirt">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $product->name }}</h5>
-                        <p class="card-text">${{ number_format($product->price, 2) }}</p>
+                        <h5 class="card-title">Classic T-Shirt</h5>
+                        <p class="card-text">$25.99</p>
                         <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
                     </div>
                 </div>
             </div>
-        @endforeach
-    </div>
-</section>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{{ asset('build/assets/images/product2.jpg') }}" class="card-img-top" alt="Stylish Jacket">
+                    <div class="card-body">
+                        <h5 class="card-title">Stylish Jacket</h5>
+                        <p class="card-text">$35.99</p>
+                        <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{{ asset('build/assets/images/product3.jpg') }}" class="card-img-top" alt="Denim Jeans">
+                    <div class="card-body">
+                        <h5 class="card-title">Denim Jeans</h5>
+                        <p class="card-text">$45.99</p>
+                        <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{{ asset('build/assets/images/product4.jpg') }}" class="card-img-top" alt="Trendy Hoodie">
+                    <div class="card-body">
+                        <h5 class="card-title">Trendy Hoodie</h5>
+                        <p class="card-text">$49.99</p>
+                        <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Add More Static Products Here -->
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{{ asset('build/assets/images/product5.jpg') }}" class="card-img-top" alt="Summer Dress">
+                    <div class="card-body">
+                        <h5 class="card-title">Summer Dress</h5>
+                        <p class="card-text">$29.99</p>
+                        <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{{ asset('build/assets/images/product6.jpg') }}" class="card-img-top" alt="Casual Shirt">
+                    <div class="card-body">
+                        <h5 class="card-title">Casual Shirt</h5>
+                        <p class="card-text">$22.99</p>
+                        <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{{ asset('build/assets/images/product7.jpg') }}" class="card-img-top" alt="Formal Blazer">
+                    <div class="card-body">
+                        <h5 class="card-title">Formal Blazer</h5>
+                        <p class="card-text">$55.99</p>
+                        <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="{{ asset('build/assets/images/product8.jpg') }}" class="card-img-top" alt="Chic Skirt">
+                    <div class="card-body">
+                        <h5 class="card-title">Chic Skirt</h5>
+                        <p class="card-text">$24.99</p>
+                        <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+            
+            <!-- Dynamic Products Display -->
+            @foreach($products as $product)
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <p class="card-text">${{ number_format($product->price, 2) }}</p>
+                            <a href="{{ route('cart') }}" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </section>
 
 
 
- 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="build/assets/js/script.js"></script>
@@ -218,5 +237,4 @@
 </body>
 
 </html>
-
 </x-web-layout>

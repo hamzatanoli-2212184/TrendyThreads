@@ -15,5 +15,12 @@ class Product extends Model
         'description',
         'price',
         'image',
+        'category_id', // Add category_id to mass assignable fields
     ];
+
+    // Define relationship with Category model
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

@@ -6,9 +6,6 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\ProductController; // Import the ProductController
 use App\Http\Controllers\AdminController; // Import the AdminController
 use App\Http\Controllers\ShopController;
-
-
-
 // Public Routes
 Route::controller(WebController::class)->group(function () {
     Route::get('/', 'index')->name('home'); // Home page
@@ -17,7 +14,6 @@ Route::controller(WebController::class)->group(function () {
     Route::get('/women', 'women')->name('women'); // Women page
     Route::get('/cart', 'cart')->name('cart'); // Cart page
     Route::get('/contact', 'contact')->name('contact'); // Contact page
-    
 });
 
 // Admin Routes with Authentication
@@ -50,6 +46,4 @@ Route::middleware('auth')->group(function () {
 });
 
 // Authentication
-require __DIR__.'/auth.php';
-
-
+require __DIR__.'/auth.php' ;
