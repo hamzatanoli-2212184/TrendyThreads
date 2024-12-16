@@ -6,6 +6,8 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\ProductController; // Import the ProductController
 use App\Http\Controllers\AdminController; // Import the AdminController
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CategoryController; // Import CategoryController
+
 // Public Routes
 Route::controller(WebController::class)->group(function () {
     Route::get('/', 'index')->name('home'); // Home page
@@ -20,6 +22,9 @@ Route::controller(WebController::class)->group(function () {
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard'); // Admin dashboard route
     Route::resource('products', ProductController::class); // Product management routes
+
+    // Categories management routes
+    Route::resource('categories', CategoryController::class); // Add CRUD routes for categories
 });
 
 // Product routes for CRUD operations
@@ -32,6 +37,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy'); // Delete product
     Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 });
+// Add category routes
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+    Route::resource('categories', CategoryController::class); // Add routes for categories
+});
+
 
 // Authentication Routes
 Route::get('/dashboard', function () {
@@ -46,4 +56,4 @@ Route::middleware('auth')->group(function () {
 });
 
 // Authentication
-require __DIR__.'/auth.php' ;
+require __DIR__.'/auth.php';
