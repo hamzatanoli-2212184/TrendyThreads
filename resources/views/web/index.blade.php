@@ -10,12 +10,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-<div>
-    <form class="d-flex search-form" method="GET" action="search_results.html">
-                    <input type="text" class="search-input" placeholder="Search..." name="query" required>
-                    <button class="search-button" type="submit">Search</button>
-                    
-                </form>
+    <div>
+    <form class="d-flex search-form" method="GET" action="javascript:void(0);">
+        <input type="text" id="search-input" class="search-input" placeholder="Search..." name="query" required>
+        <button class="search-button" type="submit">Search</button>
+    </form>
+    <!-- Dropdown for results -->
+    <ul id="search-results" class="list-group" style="position: absolute; z-index: 1000; width: 50%; display: none;"></ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('search-input');
+        const resultsDropdown = document.getElementById('search-results');
+
+        searchInput.addEventListener('keyup', function () {
+            const query = this.value;
+
+            if (query.length > 2) { // Minimum 3 characters before search starts
+                fetch(`/admin/products/search?query=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        resultsDropdown.innerHTML = ''; // Clear previous results
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                const li = document.createElement('li');
+                                li.className = 'list-group-item';
+                                li.textContent = `${product.name} - $${product.price}`;
+                                resultsDropdown.appendChild(li);
+                            });
+                            resultsDropdown.style.display = 'block';
+                        } else {
+                            resultsDropdown.innerHTML = '<li class="list-group-item">No results found</li>';
+                            resultsDropdown.style.display = 'block';
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                resultsDropdown.style.display = 'none';
+            }
+        });
+
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            if (!resultsDropdown.contains(event.target) && event.target !== searchInput) {
+                resultsDropdown.style.display = 'none';
+            }
+        });
+    });
+</script>
 
    
 
